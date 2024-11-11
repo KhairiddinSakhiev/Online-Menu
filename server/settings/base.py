@@ -2,7 +2,7 @@ from pathlib import Path
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -63,6 +63,18 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'server.wsgi.application'
+
+# Конфигурация базы данных
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
+        'NAME': os.getenv('DB_NAME', 'onlinemenudb'),
+        'USER': os.getenv('DB_USER', 'postgres'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'online_menu2024'),
+        'HOST': os.getenv('DB_HOST', 'online_menu_db'),  # В Docker укажите 'db', как в docker-compose.yml
+        'PORT': os.getenv('DB_PORT', '5432'),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators

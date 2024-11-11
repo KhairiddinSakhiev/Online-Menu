@@ -1,29 +1,24 @@
-# pull official base image
-FROM python:3.11.4-slim-buster
+# Используем официальный Python образ
+FROM python:3.10-slim
 
-# set work directory
-WORKDIR /usr/src/app
+# Устанавливаем рабочую директорию в контейнере
+WORKDIR /app
 
-# set environment variables
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
+# Копируем файл requirements.txt в контейнер и устанавливаем зависимости
+COPY requirements.txt .
+RUN apt-get update && \
+    apt-get install -y libpq-dev gcc && \
+    rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir -r requirements.txt
 
-# install system dependencies
-RUN apt-get update && apt-get install -y netcat
-
-# install dependencies
-RUN pip install --upgrade pip
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
-
-
-# copy entrypoint.sh
-#COPY ./entrypoint.sh .
-#RUN sed -i 's/\r$//g' /usr/src/app/entrypoint.sh
-#RUN chmod +x /usr/src/app/entrypoint.sh
-
-# copy project
+# Копируем весь код проекта в контейнер
 COPY . .
 
+# Устанавливаем переменную окружения для Django
+ENV DJANGO_SETTINGS_MODULE=server.settings.production
 
-#ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+# Открываем порт 8000 для доступа к приложению
+EXPOSE 8000
+
+# Определяем команду по умолчанию для запуска приложения
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

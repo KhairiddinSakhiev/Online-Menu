@@ -1,12 +1,33 @@
-version: '3.8'
-
 services:
-  web:
+  online_menu_web:
     build:
       context: .
       dockerfile: Dockerfile
-    command: gunicorn server.wsgi:application --bind 0.0.0.0:8001
+    image: tajievolimjon/online_menu_web_api
+    container_name: online_menu_web
+    environment:
+      - DJANGO_SETTINGS_MODULE=server.settings.production
+      - DB_NAME=onlinemenudb
+      - DB_USER=postgres
+      - DB_PASSWORD=online_menu2024
+      - DB_HOST=online_menu_db
+      - DB_PORT=5432
     ports:
-      - 8001:8001
+      - "8000:8000"
+    depends_on:
+      - online_menu_db
+
+  online_menu_db:
+    image: postgres:13
+    container_name: online_menu_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: online_menu2024
+      POSTGRES_DB: onlinemenudb
     volumes:
-    - ./:/usr/src/app
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
+
+#docker-compose exec online_menu_web python manage.py migrate
