@@ -40,7 +40,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ['id', 'title', 'price', 'description', 'image', 'availability_status']
+        fields = ['id', 'title', 'price', 'description', 'image', 'availability_status', 'rating']
 
     def get_title(self, obj):
         return {
@@ -65,6 +65,11 @@ class CategoryWithProductsSerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'title', 'description', 'image', 'status', 'products']
+    
+    def get_products(self, obj):
+        # Sort products by rating in descending order
+        products = obj.product_set.order_by('-rating')
+        return ProductSerializer(products, many=True).data
     
     def get_title(self, obj):
         return {

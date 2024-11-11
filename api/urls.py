@@ -1,13 +1,10 @@
 from django.urls import path
-from django.conf import settings
-from django.conf.urls.static import static
-
 
 from .views import (MenuListView, CategoryListView, 
                     ProductListView, ProductsByCategory, 
                     CategoryWithProductsListView,
                     MenuWithCategoriesListView, 
-                    ProductDetailView, )
+                    ProductDetailView, RecommendedProductsView,)
 
 
 
@@ -20,8 +17,7 @@ urlpatterns = [
 
     path('products/', ProductListView.as_view(), name='product_list'),
     path('products-by-category/<int:category_id>/', ProductsByCategory.as_view(), name='product_by_category'),
-    path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail')
-]
+    path('product/<int:pk>/', ProductDetailView.as_view(), name='product_detail'),
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('recommended-products/', RecommendedProductsView.as_view(), name='recommended_products'),
+]

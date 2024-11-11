@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
-
+    'corsheaders',
 
     'api.apps.ApiConfig',
 ]
@@ -37,6 +37,7 @@ MIDDLEWARE = [
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware', # new
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -94,20 +95,21 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# CSRF_TRUSTED_ORIGINS = [
-#      "https://28monkeys.livo.tj",
-#      "https://28monkeys.tj",
+CSRF_TRUSTED_ORIGINS = [
+     "https://menu-api.softclub.tj",
+]
+
+# CORS_ALLOWED_ORIGINS = [
+#     # testing env
+#     "http://0.0.0.0:8000",
+#     "http://localhost:8000",
+#     "http://127.0.0.1:8000",
+#     "http://localhost:3000",
+#     "http://127.0.0.1:3000",
+#     "http://37.27.29.18:8000",
 # ]
 
-CORS_ALLOWED_ORIGINS = [
-    # testing env
-    "http://0.0.0.0:8000",
-    "http://localhost:8000",
-    "http://127.0.0.1:8000",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "http://37.27.29.18:8000",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Internationalization
@@ -131,9 +133,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
-STATIC_URL = 'static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+STATIC_URL = "/static/"
+STATIC_ROOT = BASE_DIR / "static"
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 
 # Default primary key field type
