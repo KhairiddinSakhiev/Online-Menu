@@ -66,13 +66,26 @@ TEMPLATES = [
 WSGI_APPLICATION = 'server.wsgi.application'
 
 # Конфигурация базы данных
+#v1
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
+#         'NAME': os.getenv('DB_NAME', 'onlinemenudb'),
+#         'USER': os.getenv('DB_USER', 'postgres'),
+#         'PASSWORD': os.getenv('DB_PASSWORD', 'online_menu2024'),
+#         'HOST': os.getenv('DB_HOST', 'online_menu_db'),  # В Docker укажите 'db', как в docker-compose.yml
+#         'PORT': os.getenv('DB_PORT', '5432'),
+#     }
+# }
+
+#v2
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
-        'NAME': os.getenv('DB_NAME', 'onlinemenudb'),
+        'NAME': os.getenv('DB_NAME', 'armutmenudb'),
         'USER': os.getenv('DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'online_menu2024'),
-        'HOST': os.getenv('DB_HOST', 'online_menu_db'),  # В Docker укажите 'db', как в docker-compose.yml
+        'PASSWORD': os.getenv('DB_PASSWORD', 'armutmenu2024'),
+        'HOST': os.getenv('DB_HOST', 'armut_api_db'),  # В Docker укажите 'db', как в docker-compose.yml
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }

@@ -1,33 +1,88 @@
+#v1
+# services:
+#   online_menu_web:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     image: tajievolimjon/online_menu_web_api
+#     container_name: online_menu_web
+#     environment:
+#       - DJANGO_SETTINGS_MODULE=server.settings.production
+#       - DB_NAME=onlinemenudb
+#       - DB_USER=postgres
+#       - DB_PASSWORD=online_menu2024
+#       - DB_HOST=online_menu_db
+#       - DB_PORT=5432
+#     ports:
+#       - "8000:8000"
+#     depends_on:
+#       - online_menu_db
+      # networks:
+      #   - menu-dev
+
+#   online_menu_db:
+#     image: postgres:13
+#     container_name: online_menu_db
+#     ports:
+#       - "5400:5432"
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: online_menu2024
+#       POSTGRES_DB: onlinemenudb
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+      # networks:
+      #   - menu-dev
+
+# networks:
+#   menu-dev:
+
+# volumes:
+#   postgres_data:
+ 
+#docker-compose exec online_menu_web python manage.py migrate
+
+#v2
 services:
-  online_menu_web:
+  armut_api:
     build:
       context: .
       dockerfile: Dockerfile
-    image: tajievolimjon/online_menu_web_api
-    container_name: online_menu_web
+    image: tajievolimjon/armut_api
+    container_name: armut_api
     environment:
       - DJANGO_SETTINGS_MODULE=server.settings.production
-      - DB_NAME=onlinemenudb
+      - DB_NAME=armutmenudb
       - DB_USER=postgres
-      - DB_PASSWORD=online_menu2024
-      - DB_HOST=online_menu_db
+      - DB_PASSWORD=armutmenu2024
+      - DB_HOST=armut_api_db
       - DB_PORT=5432
     ports:
-      - "8000:8000"
+      - "8006:8080"
     depends_on:
-      - online_menu_db
+      - armut_api_db
+    networks:
+      - armut-dev
 
-  online_menu_db:
+  armut_api_db:
     image: postgres:13
-    container_name: online_menu_db
+    container_name: armut_api_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: online_menu2024
-      POSTGRES_DB: onlinemenudb
+      POSTGRES_PASSWORD: armutmenu2024
+      POSTGRES_DB: armutmenudb
+    ports:
+      - "5436:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - armut-dev
+
+
+networks:
+  armut-dev:
 
 volumes:
   postgres_data:
 
-#docker-compose exec online_menu_web python manage.py migrate
+#docker-compose exec armut_api python manage.py migrate
