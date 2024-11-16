@@ -40,7 +40,7 @@
 # volumes:
 #   postgres_data:
  
-#docker-compose exec online_menu_web python manage.py migrate
+#docker compose exec online_menu_web python manage.py migrate
 
 #v2
 services:
@@ -85,4 +85,4 @@ networks:
 volumes:
   postgres_data:
 
-#docker-compose exec armut_api python manage.py migrate
+#docker compose exec armut_api python manage.py migrate
