@@ -42,47 +42,97 @@
  
 #docker compose exec online_menu_web python manage.py migrate
 
-#v2
+#*******************************************************************************
+
+# #v2
+# services:
+#   armut_api:
+#     build:
+#       context: .
+#       dockerfile: Dockerfile
+#     image: tajievolimjon/armut_api
+#     container_name: armut_api
+#     environment:
+#       - DJANGO_SETTINGS_MODULE=server.settings.production
+#       - DB_NAME=armutmenudb
+#       - DB_USER=postgres
+#       - DB_PASSWORD=armutmenu2024
+#       - DB_HOST=armut_api_db
+#       - DB_PORT=5432
+#     ports:
+#       - "8006:8080"
+#     depends_on:
+#       - armut_api_db
+#     networks:
+#       - armut-dev
+
+#   armut_api_db:
+#     image: postgres:13
+#     container_name: armut_api_db
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: armutmenu2024
+#       POSTGRES_DB: armutmenudb
+#     ports:
+#       - "5436:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+#     networks:
+#       - armut-dev
+
+
+# networks:
+#   armut-dev:
+
+# volumes:
+#   postgres_data:
+
+# #docker compose exec armut_api python manage.py migrate
+
+#*******************************************************************************
+
+#v3
 services:
-  armut_api:
+  merve_api:
     build:
       context: .
       dockerfile: Dockerfile
-    image: tajievolimjon/armut_api
-    container_name: armut_api
+    image: tajievolimjon/merve_api
+    container_name: merve_api
     environment:
       - DJANGO_SETTINGS_MODULE=server.settings.production
-      - DB_NAME=armutmenudb
+      - DB_NAME=mervemenudb
       - DB_USER=postgres
-      - DB_PASSWORD=armutmenu2024
-      - DB_HOST=armut_api_db
+      - DB_PASSWORD=mervemenu2024
+      - DB_HOST=merve_api_db
       - DB_PORT=5432
     ports:
       - "8006:8080"
     depends_on:
-      - armut_api_db
+      - merve_api_db
     networks:
-      - armut-dev
+      - merve-dev
 
-  armut_api_db:
+  merve_api_db:
     image: postgres:13
-    container_name: armut_api_db
+    container_name: merve_api_db
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: armutmenu2024
-      POSTGRES_DB: armutmenudb
+      POSTGRES_PASSWORD: mervemenu2024
+      POSTGRES_DB: mervemenudb
     ports:
       - "5436:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
-      - armut-dev
+      - merve-dev
 
 
 networks:
-  armut-dev:
+  merve-dev:
 
 volumes:
   postgres_data:
 
-#docker compose exec armut_api python manage.py migrate
+#docker compose exec merve_api python manage.py migrate
+

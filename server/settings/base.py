@@ -79,13 +79,25 @@ WSGI_APPLICATION = 'server.wsgi.application'
 # }
 
 #v2
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
+#        'NAME': os.getenv('DB_NAME', 'armutmenudb'),
+#        'USER': os.getenv('DB_USER', 'postgres'),
+#        'PASSWORD': os.getenv('DB_PASSWORD', 'armutmenu2024'),
+#        'HOST': os.getenv('DB_HOST', 'armut_api_db'),  # В Docker укажите 'db', как в docker-compose.yml
+#        'PORT': os.getenv('DB_PORT', '5432'),
+#    }
+#}
+
+#v3
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
-        'NAME': os.getenv('DB_NAME', 'armutmenudb'),
+        'NAME': os.getenv('DB_NAME', 'mervemenudb'),
         'USER': os.getenv('DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'armutmenu2024'),
-        'HOST': os.getenv('DB_HOST', 'armut_api_db'),  # В Docker укажите 'db', как в docker-compose.yml
+        'PASSWORD': os.getenv('DB_PASSWORD', 'mervemenu2024'),
+        'HOST': os.getenv('DB_HOST', 'merve_api_db'),  # В Docker укажите 'db', как в docker-compose.yml
         'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
