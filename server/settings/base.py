@@ -121,7 +121,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-     "https://menu-api.softclub.tj",
+     "https://merve-api.softclub.tj",
 ]
 
 # CORS_ALLOWED_ORIGINS = [
