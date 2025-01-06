@@ -67,16 +67,16 @@ WSGI_APPLICATION = 'server.wsgi.application'
 
 # Конфигурация базы данных
 #v1
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
-#         'NAME': os.getenv('DB_NAME', 'onlinemenudb'),
-#         'USER': os.getenv('DB_USER', 'postgres'),
-#         'PASSWORD': os.getenv('DB_PASSWORD', 'online_menu2024'),
-#         'HOST': os.getenv('DB_HOST', 'online_menu_db'),  # В Docker укажите 'db', как в docker-compose.yml
-#         'PORT': os.getenv('DB_PORT', '5432'),
-#     }
-# }
+DATABASES = {
+     'default': {
+         'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
+         'NAME': os.getenv('DB_NAME', 'onlinemenudb'),
+         'USER': os.getenv('DB_USER', 'postgres'),
+         'PASSWORD': os.getenv('DB_PASSWORD', 'online_menu2024'),
+         'HOST': os.getenv('DB_HOST', 'online_menu_db'),  # В Docker укажите 'db', как в docker-compose.yml
+         'PORT': os.getenv('DB_PORT', '5432'),
+     }
+}
 
 #v2
 #DATABASES = {
@@ -91,16 +91,16 @@ WSGI_APPLICATION = 'server.wsgi.application'
 #}
 
 #v3
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
-        'NAME': os.getenv('DB_NAME', 'mervemenudb'),
-        'USER': os.getenv('DB_USER', 'postgres'),
-        'PASSWORD': os.getenv('DB_PASSWORD', 'mervemenu2024'),
-        'HOST': os.getenv('DB_HOST', 'merve_api_db'),  # В Docker укажите 'db', как в docker-compose.yml
-        'PORT': os.getenv('DB_PORT', '5432'),
-    }
-}
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql',  # Указываем, что используем PostgreSQL
+#        'NAME': os.getenv('DB_NAME', 'mervemenudb'),
+#        'USER': os.getenv('DB_USER', 'postgres'),
+#        'PASSWORD': os.getenv('DB_PASSWORD', 'mervemenu2024'),
+#        'HOST': os.getenv('DB_HOST', 'merve_api_db'),  # В Docker укажите 'db', как в docker-compose.yml
+#        'PORT': os.getenv('DB_PORT', '5432'),
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -121,7 +121,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 CSRF_TRUSTED_ORIGINS = [
-     "https://merve-api.softclub.tj",
+     #"https://merve-api.softclub.tj",
+     "https://menu-api.softclub.tj",
 ]
 
 # CORS_ALLOWED_ORIGINS = [
